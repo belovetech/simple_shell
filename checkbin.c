@@ -23,7 +23,7 @@ char *_verifypath(char *path, char *pwd)
 			newpath[0] = pwd[0];
 			for (i = 0; path[i] != '\0'; i++)
 				newpath[i + 1] = path[i];
-
+			free(path);
 			path = newpath;
 			a++;
 			c++;
