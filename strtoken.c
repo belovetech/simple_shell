@@ -8,7 +8,7 @@
 int _sch(char *s, char c)
 {
 	int cont = 0;
-		
+
 	while (s[cont] != '\0')
 	{
 		if (s[cont] == c)
