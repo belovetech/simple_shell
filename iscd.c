@@ -1,4 +1,5 @@
 #include "shell.h"
+#define BUF_SIZE 2048
 /**
  * _iscd - finds if line input is cd builtin
  * @p: input of user, array of pointers
@@ -46,7 +47,7 @@ void _cleancd(char *c)
 {
 	int i;
 
-	for (i = 0; i < 2048; i++)
+	for (i = 0; i < BUF_SIZE; i++)
 		c[i] = 0;
 }
 
@@ -62,7 +63,7 @@ void _fullcd(char *f, char *aux)
 
 	for (w = 0; aux[w] != '\0'; w++)
 		f[w] = aux[w];
-	for (; w < 2048; w++)
+	for (; w < BUF_SIZE; w++)
 		f[w] = 0;
 }
 /**
@@ -76,39 +77,39 @@ void _fullcd(char *f, char *aux)
 void _cd(char **a, int loop, char *v[], char **myenv)
 {
 	int valor = 0, z = 0;
-	static char buf[2048];
+	static char buf[BUF_SIZE];
 	static int w = 1;
-	char *home, aux[2048] = {0};
+	char *home, aux[BUF_SIZE] = {0};
 
 	currentstatus(&z);
 	if (w == 1)
 	{ home = _gethome(myenv);
 		if (!home)
-			getcwd(home, 2048);
-		_updateoldpwd(getcwd(buf, 2048), myenv);
+			getcwd(home, BUF_SIZE);
+		_updateoldpwd(getcwd(buf, BUF_SIZE), myenv);
 		_fullcd(buf, _gethome(myenv));
 		w++;
 	}
 	if (a[1] == NULL)
 	{
 		_cleancd(buf);
-		getcwd(buf, 2048);
+		getcwd(buf, BUF_SIZE);
 		_updateoldpwd(buf, myenv);
 		valor = chdir((const char *)_gethome(myenv));
 		_updatepwd(_gethome(myenv), myenv);
 	}
 	else if (a[1][0] == '-' && a[1][1] == '\0')
 	{
-		_cleancd(aux), getcwd(aux, 2048);
+		_cleancd(aux), getcwd(aux, BUF_SIZE);
 		_updateoldpwd(aux, myenv);
-		write(STDOUT_FILENO, buf, 2048);
+		write(STDOUT_FILENO, buf, BUF_SIZE);
 		write(STDOUT_FILENO, "\n", 1);
 		valor = chdir((const char *) buf);
 		_updatepwd(buf, myenv), _fullcd(buf, aux);
 	}
 	else
 	{
-		_cleancd(buf), getcwd(buf, 2048);
+		_cleancd(buf), getcwd(buf, BUF_SIZE);
 		_updateoldpwd(buf, myenv);
 		valor = chdir((const char *)a[1]);
 		_updatepwd(a[1], myenv);
@@ -116,3 +117,4 @@ void _cd(char **a, int loop, char *v[], char **myenv)
 	if (valor == -1)
 		_put_err(a, loop, 1, v);
 }
+
