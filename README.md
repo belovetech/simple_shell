@@ -1,86 +1,155 @@
 
-#  Simple_shell #
+## Simple_shell Project
+
+This is a project created by [Abeeb Raheem](https://github.com/belovetech) and [Ogunbanjo Nimota Busayo](https://github.com/Nimbusshub). This project recreates the shell which is the Linux command line interpreter in its simplest form. It provides an interface between the user and the kernel and executes programs.
+
+The "Simple_shell" is a program that can be compiled and launched from the command line, where its main function is to execute commands read from the standard input. It contains some of the basic features and functions found in the various shell programs like Kernel commands and builtin commands.
+
+## Quick Start
+
+1. Git clone this respository to your local directory.
+
+       $ git clone https://github.com/belovetech/simple_shell.git
   
-  This is a project created by [Abeeb Raheem](https://github.com/belovetech) and [Ogunbanjo Nimota Busayo](https://github.com/Nimbusshub).
-  Simple shell project recreates the shell which is the Linux command line interpreter in its simplest form. It provides an interface between the user and the kernel and executes programs.
+2. Compile the program.
 
-  The prototype of the `_printf()` function is:
+       $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+       
+3. Now execute the shell.
+      
+       $ ./hsh
+       
+## Builtin Commands
 
-  > `int _printf(const char *format, ...);`
+This shell supports the next builtin commands:
 
-  `_printf()` is a variadic function therefore it can receive n number of arguements passed inside the formatted string.
+    cd - change directory
 
-  If successful, the total number of characters passed into the string is returned. On failure, a negative number is returned.
-  
+    env - list the current environment variables
 
-  ### **Parameters** ###
+    exit - exit the shell
+    
+    help - show help for a builtin command
+    
+    pwd - Print the absolute pathname of the current working directory
+    
+    unsetenv - Remove an environment variable
 
-  **format -** This is the string that contains the text to be written to the standout output. Format can also contain format tags which are replaced by the values in the additonal arguements passed into it.
+## Delimit and comment commands
 
-  The format tags prototype is as follows:
+	; -  The semicolon. command separator that allows to run a command on a single line placing the semicolon between
+       each command.
+	
+	# - The command number. Allows a word beginning with # and all remaining characters on that line to be ignored.
 
-  
-  > %[flags][length]specifier
+## Manual
 
-  | **Specifier**|     **Output**               |
-  |    :---:     | :-------------               |
-  | **c**        | Character                    |
-  | **d or i**   | Signed decimal integer       |
-  | **s**        | Strings of characters        |
-  | **b**        | Binary                       |
-  | **u**        | Unsigned decimal integer     |
-  | **o**        | Signed octal                 |
-  | **x**        | Unsigned hexadecimal integer |
-  | **X**        | Unsigned hexadecimal integers capital letters |
-  | **S**        | String with special characters replaced by ASCII value |              |
-  | **p**        | Pointer address              |
-  | **%**        | Character                    |
-  | **r**        | Prints a string in reverse   |
-  | **R**        | Prints the rot13'ed string   |
+To see the manual run:
 
+    $ man ./man_1_simple_shell
+    
+Example:
+    	
+	man(1)                                  Manual page for Simple_Shell           			man(1)                                
 
+	NAME
+       	Simple_Shell - Command language interpreter
 
-  | **Flags**    | **Description** |  **Specifiers** |
-  |   :-----:    | :-------------  |   :-------:   |
-  | **+**        | Forces to precede the result with a plus or minus sign |   i , d  |
-  | **#**        | Used with o,x or X specifiers. It prints 0, 0x and 0X for these specifiers respectively. By default if no digit follows, no decimal point is written. | o, x, X |
-  | **(space)**  | prints a blank space if the arguement is a positive number |       |
+	SYNOPSIS
+       	./hsh
 
-  
+	DESCRIPTION
+       	Command language interpreter that executes commands read from the standard input or from a file.
 
-  | **Length**   | **Description**   |  **Specifier** |
-  |   :----:     | :--------         |   :------:     |
-  | **l**        | Conversion of integer specifiers into long int and unsigned long int | d, i, o, u, x, X |
-  | **h**        | Conversion of integer specifiers into short int and unsigned short int | d, i, o, u, x, X |
+	INVOCATION
+       	An  interactive  shell is one started without non-option arguments, just running ./hsh. 
+	Otherwise, when is started non-interactively, to run a shell script, for example, the 
+	shell reads and execute the next command echo "pwd" | ./hsh.
+	
+							.  .  .
 
 
-  ### **Return Value** ###
+## Files
 
-  The function returns the total number of characters passed into the format (Success). Otherwise, a negative number is returned.
+Brief description of every file in this repository.
+	
+| File | Description |
+| ------------- | ------------- |
+| _atoi.c | function that gets sign and numbers of string |
+| _calloc.c | function that allocates memory for an array |
+| _change.c | functions that change the OLDPWD and PWD environment variables |
+| _display_help.c | functions that reads all builtins text files and prints it to POSIX stdout |
+| _envir.c | functions to print the environment variables and create a copy of env |
+| _errors.c | functions with the error message for each builtin |
+| _forky.c | program that creates process and execute |
+| _gethome.c | funtion to get the environment variable HOME |
+| _getline.c | functions to read what the user writes |
+| _iscd.c | functions to change the current directory of the process. |
+| _isexit.c | functions that finds if line input is exit therefore process termination |
+| _ishelp.c | functions to print the help of each builtin |
+| _noargv.c | function to give shell form without filename as input |
+| _realloc.c | function to change the size and copy the content |
+| _realloc2.c | function to change the size and copy the content special case |
+| _signal.c | function to handle SIGINT signal |
+| _str_concat.c | function to create an array using malloc |
+| _strlen.c | function that returns the length of a string |
+| _unsetenv.c | functions to remove an environment variable |
+| _strtoky.c | functions to cut a string into tokens depending of the delimit|
+| _writerr.c | functions to print the error for each builtin |
+| _yesargv.c | function to give shell form with filename as input |
+| checkbin.c | functions to check if commands exist in the path |
+| free_grid.c | function to free a matrix |
+| man_1_simple_shell | manual of simple_shell |
+| parsing.c | functions that create an array of pointers depending of the delimit characters |
+| shell.h | header file with all thr function prototypes |
+| startshell.c | main function that stars the shell (shell skeleton) |
 
-  
-  ### **Examples** ###
+## Examples
+Some examples for builtins after execute ./hsh
 
-  1. Using `_printf()` to print "Hello World":
+cd:
 
-  > `_printf("Hello World\n");`
-  > **Output:** `Hello World`
+	#cisfun$ pwd
+	/home/vagrant/simple_shell
+	#cisfun$ cd
+	#cisfun$ pwd
+	/home/vagrant
+	#cisfun$
+	
+cd error:
 
-  2. Using `_printf()` to print character, string and integer:
+	#cisfun$ cd hola
+	./hsh: 1: cd: can't cd to hola
+	#cisfun$
 
-  > `_printf("%d + %d equals %c%s", 18, 2, 'T', "wenty\n");`
-  > **Output:** `18 + 2 equals Twenty`
+exit:
 
-  3. Using `_printf()` to print hexadecimals
+	#cisfun$ exit 123
+	vagrant@vagrant-ubuntu-trusty-64:~/simple_shell$ echo $?
+	123
+	
+exit error:
 
-  > `_printf("255 in hexadecimal = %x\n", 255);`
-  > **Output:** `255 in hexadecimal = ff`
+	#cisfun$ exit hola
+	./hsh: 2: exit: Illegal number: hola
+	#cisfun$
 
-  
-  ### **Files** ###
+help:
 
-  ##### `_print()` #####  
-  A funtion that prints all the strings passed into it in the standard library.
+	#cisfun$ help exit
+	exit: exit [n]
+    	Exit the shell.
 
-  ##### **main.h** #####
-  This is a header file that contains all  the prototypes of all the functions created.
+    	Exits the shell with a status of N.  If N is omitted, the exit status
+    	is that of the last command executed.
+	#cisfun$
+
+help error:
+
+	#cisfun$ help hola
+	./hsh: 4: help: no help topics match 'hola'. Try 'help help' or 'man -k 'hola' or info 'hola'
+	#cisfun$
+
+## Authors 
+ Abeeb Raheem and Ogunbanjo Nimota Busayo
+
