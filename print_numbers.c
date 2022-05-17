@@ -6,7 +6,7 @@
  */
 void print_number(int n)
 {
-	unsigned int j, cont = 1;
+	unsigned int j, count = 1;
 	char a;
 	unsigned int var1, num, var2, var3 = 1;
 
@@ -15,10 +15,10 @@ void print_number(int n)
 	while (num > 9)
 	{
 		num = num / 10;
-		cont++;
+		count++;
 		var3 = var3 * 10;
 	}
-	for (j = 1; j <= cont; j++)
+	for (j = 1; j <= count; j++)
 	{
 		var1 = var2 / var3;
 		var2 = var2 % var3;
